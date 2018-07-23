@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"  lang="en-us">
 <head>
-	<meta name="generator" content="Hugo 0.45" />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title></title>
+<title>From MVC to MVVM | Jing Zhou</title>
 
-<meta property='og:title' content='Jing Zhou'>
-<meta property='og:description' content=''>
-<meta property='og:url' content='https://jing-zhou.xyz/'>
+<meta property='og:title' content='From MVC to MVVM - Jing Zhou'>
+<meta property='og:description' content='Recently I&rsquo;ve started to think about the Model-view-viewmodel(MVVM) pattern and how it&rsquo;s an improvement to the Model-view-controller(MVC) I&rsquo;m used to.
+This transition to MVVM happened for two reasons. First, I&rsquo;ve worked with AngularJS for the past two years and knew intimately about its shortcomings. Second, I started to see how the view controllers in my iOS Swift project are gradually getting out of hand &ndash; they became massive view controllers.'>
+<meta property='og:url' content='https://jing-zhou.xyz/posts/mvvm/'>
 <meta property='og:site_name' content='Jing Zhou'>
-<meta property='og:type' content='website'><meta property='og:image' content='https://www.gravatar.com/avatar/39ae22259f3226479b90af7cf4bb6122?s=256'><meta property='article:section' content=''><meta property='og:updated_time' content='2018-07-18T17:50:17-07:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@gnijuohz'><meta name='twitter:creator' content='@gnijuohz'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/39ae22259f3226479b90af7cf4bb6122?s=256'><meta property='article:section' content='Posts'><meta property='article:published_time' content='2018-07-18T17:50:17-07:00'/><meta property='article:modified_time' content='2018-07-18T17:50:17-07:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@gnijuohz'><meta name='twitter:creator' content='@gnijuohz'>
 <link rel="stylesheet" href="/css/style.css"/><link rel='stylesheet' href='https://jing-zhou.xyz/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -93,46 +93,65 @@
 
 <section class="section">
   <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">July 18, 2018</h2>
+    <h1 class="title">From MVC to MVVM</h1>
     
-    
-    <article>
-      <div class="subtitle tags is-6 is-pulled-right">
-        
-      </div>
-      <h2 class="subtitle is-6">July 18, 2018</h2>
-      <h1 class="title"><a href="https://jing-zhou.xyz/posts/mvvm/">From MVC to MVVM</a></h1>
-      <div class="content">
-        Recently I&rsquo;ve started to think about the Model-view-viewmodel(MVVM) pattern and how it&rsquo;s an improvement to the Model-view-controller(MVC) I&rsquo;m used to.
-This transition to MVVM happened for two reasons. First, I&rsquo;ve worked with AngularJS for the past two years and knew intimately about its shortcomings. Second, I started to see how the view controllers in my iOS Swift project are gradually getting out of hand &ndash; they became massive view controllers.
-        
-        <a class="button is-link" href="https://jing-zhou.xyz/posts/mvvm/" style="height:28px">
-          Read more
-          <span class="icon is-small">
-            <i class="fa fa-angle-double-right"></i>
-          </span>
-        </a>
-        
-      </div>
-    </article>
+    <div class="content">
+      <p>Recently I&rsquo;ve started to think about the Model-view-viewmodel(MVVM) pattern and how it&rsquo;s an improvement to the Model-view-controller(MVC) I&rsquo;m used to.</p>
+
+<p>This transition to MVVM happened for two reasons. First, I&rsquo;ve worked with AngularJS for the past two years and knew intimately about its shortcomings. Second, I started to see how the view controllers in my iOS Swift project are gradually getting out of hand &ndash; they became massive view controllers.</p>
+
+<p>Usually, the controllers in MVC pattern would get bloated with logic that doesn&rsquo;t quite fit there. For example, the logic to fetch data from the backend and the logic of formatting data for display. This makes the controllers hard to understand and hard to test. Some may argue it&rsquo;s still possible to write good, manintable code using MVC. I wouldn&rsquo;t disagree but that&rsquo;s certainly harder to accomplish than using MVVM pattern.</p>
+
+<p>So what is MVVM? In MVVM, viewModel is a new layer between model and view that takes a lot of the responsibility previously bestowed to view controllers. The article by <a href="https://twitter.com/ashfurrow" target="_blank">Ash Furrow</a> has a good explanation of this pattern:</p>
+
+<blockquote>
+<p>Under MVVM, the view and view controller become formally connected; we treat them as one. Views still don’t have references to the model, but neither do controllers. Instead, they reference the view model.</p>
+</blockquote>
+
+<p>And that,</p>
+
+<blockquote>
+<p>The view model is an excellent place to put validation logic for user input, presentation logic for the view, kick-offs of network requests, and other miscellaneous code.</p>
+</blockquote>
+
+<p>Data binding is the missing piece here. How does the change of the model reflect in the view? There are several suggestions such as plain KVO and RxSwift.</p>
+
+<p>I feel this paradigm shift is somewhat parallel to going from AngularJS to React or Vue. Vue&rsquo;s doc says,</p>
+
+<blockquote>
+<p>Although not strictly associated with the MVVM pattern, Vue’s design was partly inspired by it. As a convention, we often use the variable vm (short for ViewModel) to refer to our Vue instance.</p>
+</blockquote>
+
+<p>Look closely, it&rsquo;s not hard to see why, the <code>data</code> option can be considered the model and the functions in <code>methods</code> are operations related to the model.</p>
+
+      
+      <div class="related">
+</div>
+      
+    </div>
     
   </div>
 </section>
+
 <section class="section">
   <div class="container">
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          
-        </div>
-      </div>
-      <div class="level-right is-marginless">
-        <div class="level-item">
-          
-        </div>
-      </div>
-    </nav>
+    <aside><div id="disqus_thread"></div></aside>
+    <script type="text/javascript">
+      var disqus_shortname = 'gnijuohz';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
   </div>
 </section>
+
 
 <section class="section">
   <div class="container has-text-centered">
